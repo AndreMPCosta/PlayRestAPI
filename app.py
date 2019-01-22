@@ -1,3 +1,7 @@
+import logging
+import os
+import sys
+
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
@@ -18,6 +22,9 @@ from libs.image_helper import IMAGE_SET
 
 
 app = Flask(__name__)
+if 'DYNO' in os.environ:
+    app.logger.addHandler(logging.StreamHandler(sys.stdout))
+    app.logger.setLevel(logging.ERROR)
 load_dotenv(".env", verbose=True)
 app.config.from_object("default_config")  # load default configs from default_config.py
 app.config.from_envvar(
