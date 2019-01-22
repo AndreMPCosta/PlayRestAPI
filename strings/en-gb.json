@@ -1,0 +1,54 @@
+{
+  "mailgun_failed_load_api_key": "Failed to load MailGun API key.",
+  "mailgun_failed_load_domain": "Failed to load MailGun domain.",
+  "mailgun_error_send_email": "Error in sending confirmation email, user registration failed.",
+
+  "twilio_failed_load_account_sid": "Failed to load Twilio Account SID.",
+  "twilio_failed_load_auth_token": "Failed to load Twilio Auth Token.",
+  "twilio_error_send_sms": "Error in sending confirmation sms, user registration failed.",
+
+  "confirmation_not_found": "Confirmation reference not found.",
+  "confirmation_link_expired": "The link has expired.",
+  "confirmation_code_expired": "The code has expired.",
+  "confirmation_already_confirmed": "Registration has already been confirmed.",
+  "confirmation_resend_fail": "Internal server error. Failed to resend confirmation email.",
+  "confirmation_resend_successful": "E-mail confirmation successfully re-sent.",
+  "confirmation_successful": "Your account is now confirmed",
+
+
+  "item_name_exists": "An item with name '{}' already exists.",
+  "item_error_inserting": "An error occurred while inserting the item.",
+  "item_not_found": "Item not found.",
+  "item_deleted": "Item deleted.",
+
+  "store_name_exists": "A store with name '{}' already exists.",
+  "store_error_inserting": "An error occurred while inserting the store.",
+  "store_not_found": "Store not found.",
+  "store_deleted": "Store deleted.",
+
+  "user_username_exists": "A user with that username already exists.",
+  "user_id_exists": "A user with that number ID already exists.",
+  "user_email_exists": "A user with that email already exists.",
+  "user_not_found": "User not found.",
+  "user_deleted": "User deleted.",
+  "user_invalid_credentials": "Invalid credentials!",
+  "user_logged_out": "User <id={}> successfully logged out.",
+  "user_not_confirmed": "You have not confirmed registration, please check your email <{}>.",
+  "user_error_creating": "Internal server error. Failed to create user.",
+  "user_error_password": "Internal server error. Failed to change user's password.",
+  "user_registered": "Account created successfully, an email with an activation link has been sent to your email address, please check.",
+  "user_invalid_code": "Invalid confirmation code!",
+  "user_sms_text_code": "Your Play Health confirmation code is: {}",
+  "user_password_success": "Your password was changed successfully",
+
+  "user_enrolled": "User enrolled to {} at {}",
+
+  "texbelt_error_send_sms": "Error in sending confirmation text, user registration failed.",
+
+  "image_uploaded": "Image '{}' uploaded.",
+  "image_illegal_extension": "Extension '{}' is not allowed.",
+
+  "course_not_found": "Course not found.",
+  "course_error_inserting": "An error occurred while inserting the course.",
+  "course_deleted": "Course deleted."
+}
