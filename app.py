@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 from db import db
 from ma import ma
 from blacklist import BLACKLIST
-from resources.course import Course, CourseList, GetEnrolledUsers, EnrollUser
+from resources.course import Course, CourseList, GetEnrolledUsers, EnrollUser, DisenrollUser
 from resources.user import UserRegister, UserLogin, User, TokenRefresh, UserLogout, UserChangePassword
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
@@ -69,9 +69,10 @@ api.add_resource(Confirmation, "/user_confirm/<string:confirmation_id>")
 api.add_resource(ConfirmationByUser, "/confirmation/user/<int:user_id>")
 api.add_resource(ConfirmationByCode, "/confirmation_code/user/<int:user_id>")
 api.add_resource(ImageUpload, "/upload/image")
-api.add_resource(Course, "/course/<string:name>")
+api.add_resource(Course, "/course/<int:course_id>", "/course/<string:name>")
 api.add_resource(CourseList, "/courses")
 api.add_resource(EnrollUser, "/enroll/")
+api.add_resource(DisenrollUser, "/disenroll/")
 api.add_resource(GetEnrolledUsers, "/enrolled_users/<int:course_id>")
 
 if __name__ == "__main__":

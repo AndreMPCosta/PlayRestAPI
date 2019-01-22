@@ -25,7 +25,6 @@ class CourseModel(db.Model):
 
     @classmethod
     def find_all(cls) -> List["CourseModel"]:
-        print(cls.query.all())
         return cls.query.all()
 
     def save_to_db(self) -> None:
@@ -36,6 +35,10 @@ class CourseModel(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def register_user(self, user) -> None:
+    def enroll_user(self, user) -> None:
         self.users.append(user)
+        self.save_to_db()
+
+    def disenroll_user(self, user) -> None:
+        self.users.remove(user)
         self.save_to_db()

@@ -39,9 +39,10 @@
   "user_registered": "Account created successfully, an email with an activation link has been sent to your email address, please check.",
   "user_invalid_code": "Invalid confirmation code!",
   "user_sms_text_code": "Your Play Health confirmation code is: {}",
-  "user_password_success": "Your password was changed successfully",
-
+  "user_password_success": "Your password was changed successfully.",
+  "user_already_enrolled": "User is already enrolled in {} at {}",
   "user_enrolled": "User enrolled to {} at {}",
+  "user_not_enrolled": "The user is not enrolled, so it is not possible to disenroll.",
 
   "texbelt_error_send_sms": "Error in sending confirmation text, user registration failed.",
 
@@ -50,5 +51,6 @@
 
   "course_not_found": "Course not found.",
   "course_error_inserting": "An error occurred while inserting the course.",
-  "course_deleted": "Course deleted."
+  "course_deleted": "Course deleted.",
+  "course_already_scheduled": "The course is already scheduled for that hour."
 }
