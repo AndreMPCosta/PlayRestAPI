@@ -16,6 +16,7 @@ marshmallow = "==3.0.0b12"
 flask-uploads = "*"
 twilio = "*"
 passlib = "*"
+uwsgi = "*"
 
 [dev-packages]
 
