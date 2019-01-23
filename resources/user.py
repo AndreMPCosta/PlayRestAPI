@@ -26,7 +26,8 @@ class UserRegister(Resource):
     @classmethod
     def post(cls):
         user_json = request.get_json()
-        user_json['password'] = encrypt_password(user_json['password'])
+        if 'password' in user_json:
+            user_json['password'] = encrypt_password(user_json['password'])
         user = user_schema.load(user_json, instance=UserModel())
 
         # if UserModel.find_by_username(user.username):
@@ -62,7 +63,8 @@ class UserRegister(Resource):
     @classmethod
     def put(cls):
         user_json = request.get_json()
-        user = UserModel.find_by_id(user_json['id'])
+        print(user_json)
+        user = UserModel.find_by_id(user_json['user_id'])
         if not user:
             return {"message": gettext("user_not_found")}, 404
         if user.password:
@@ -70,6 +72,7 @@ class UserRegister(Resource):
 
         user.temporary_password = encrypt_password(user_json['temporary_password'])
         try:
+            user.most_recent_confirmation.confirmed = False
             user.save_to_db()
             confirmation = ConfirmationModel(user.id)
             confirmation.save_to_db()
