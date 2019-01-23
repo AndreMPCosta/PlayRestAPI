@@ -63,7 +63,7 @@ class ConfirmationByUser(Resource):
         )
 
     @classmethod
-    def post(cls, user_id):
+    def post(cls, user_id: int):
         """
         This endpoint resend the confirmation email with a new confirmation model. It will force the current
         confirmation model to expire so that there is only one valid link at once.
@@ -109,10 +109,10 @@ class ConfirmationByCode(Resource):
             return {"message": gettext("user_not_found")}, 404
         if not confirmation:
             return {"message": gettext("confirmation_not_found")}, 404
-        if confirmation.code != code:
-            return{"message": gettext("user_invalid_code")}, 401
         if confirmation.expired:
             return {"message": gettext("confirmation_code_expired")}, 400
+        if confirmation.code != code:
+            return{"message": gettext("user_invalid_code")}, 401
         if confirmation.confirmed:
             return {"message": gettext("confirmation_already_confirmed")}, 400
 

@@ -14,7 +14,7 @@
   "confirmation_resend_fail": "Internal server error. Failed to resend confirmation email.",
   "confirmation_resend_successful": "E-mail confirmation successfully re-sent.",
   "confirmation_successful": "Your account is now confirmed",
-
+  "confirmation_already_sent": "A confirmation was already sent, \ndo you want to resend the confirmation?",
 
   "item_name_exists": "An item with name '{}' already exists.",
   "item_error_inserting": "An error occurred while inserting the item.",
@@ -43,6 +43,7 @@
   "user_already_enrolled": "User is already enrolled in {} at {}",
   "user_enrolled": "User enrolled to {} at {}",
   "user_not_enrolled": "The user is not enrolled, so it is not possible to disenroll.",
+  "user_not_registered": "The user is not registered yet, please register.",
 
   "texbelt_error_send_sms": "Error in sending confirmation text, user registration failed.",
 

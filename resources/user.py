@@ -63,21 +63,27 @@ class UserRegister(Resource):
     @classmethod
     def put(cls):
         user_json = request.get_json()
-        print(user_json)
         user = UserModel.find_by_id(user_json['user_id'])
         if not user:
             return {"message": gettext("user_not_found")}, 404
         if user.password:
             return {"message": gettext("user_id_exists")}, 400
-
         user.temporary_password = encrypt_password(user_json['temporary_password'])
         try:
-            user.most_recent_confirmation.confirmed = False
             user.save_to_db()
-            confirmation = ConfirmationModel(user.id)
-            confirmation.save_to_db()
-            user.send_confirmation_email()
-            user.send_sms()
+            #print(user.most_recent_confirmation)
+            if not user.most_recent_confirmation:
+                confirmation = ConfirmationModel(user.id)
+                confirmation.save_to_db()
+                user.send_confirmation_email()
+                user.send_sms()
+            elif user.most_recent_confirmation.expired:
+                confirmation = ConfirmationModel(user.id)
+                confirmation.save_to_db()
+                user.send_confirmation_email()
+                user.send_sms()
+            elif not user.most_recent_confirmation.expired:
+                return {"message": gettext("confirmation_already_sent")}, 409
             return {"message": gettext("user_registered")}, 201
         except MailGunException as e:
             user.delete_from_db()  # rollback
@@ -122,6 +128,8 @@ class UserLogin(Resource):
         user_data = user_schema.load(user_json, instance=UserModel(), partial=('email', 'phone', 'name',))
 
         user = UserModel.find_by_id(user_data.id)
+        if not user.password:
+            return {"message": gettext("user_not_registered").format(user.email)}, 400
 
         if user and check_encrypted_password(user_data.password, user.password):
             confirmation = user.most_recent_confirmation
