@@ -20,6 +20,8 @@ class UserModel(db.Model):
     email = db.Column(db.String(80), nullable=False, unique=True)
     phone = db.Column(db.String(15), unique=True, nullable=True)
     name = db.Column(db.String(80))
+    birth_date = db.Column(db.Date, nullable=True)
+    gender = db.Column(db.String(1))
 
     confirmation = db.relationship(
         "ConfirmationModel", lazy="dynamic", cascade="all, delete-orphan"

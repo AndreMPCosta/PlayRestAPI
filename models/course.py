@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import List
 
 from db import db
@@ -13,7 +14,11 @@ class CourseModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False, unique=False)
     users = db.relationship("UserModel", secondary=association_table)
-    start_time = db.Column(db.DateTime)
+    start_time = db.Column(db.Time, nullable=True)
+    location = db.Column(db.String(80), unique=False, nullable=False)
+    month = db.Column(db.Integer)
+    year = db.Column(db.Integer)
+    day_week = db.Column(db.String(80))
 
     @classmethod
     def find_by_id(cls, _id: int) -> "CourseModel":

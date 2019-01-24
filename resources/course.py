@@ -1,10 +1,14 @@
+import datetime
+import time
+
 from flask import request
 from flask_restful import Resource
+
 from models.course import CourseModel
 from models.user import UserModel
 from schemas.course import CourseSchema
 from libs.strings import gettext
-from utils.datetime_converter import str_to_datetime
+from utils.datetime_converter import str_to_time
 
 course_schema = CourseSchema()
 course_list_schema = CourseSchema(many=True)
@@ -26,10 +30,10 @@ class Course(Resource):
     @classmethod
     def post(cls, name: str):
         data = request.get_json()
-        converted_start_time = str_to_datetime(data['start_time'])
-        for course in CourseModel.find_by_name(name):
-            if course.start_time == converted_start_time:
-                return {"message": gettext("course_already_scheduled").format(name)}, 400
+        #converted_start_time = str_to_time(data['start_time'])
+        # for course in CourseModel.find_by_name(name):
+        #     if course.start_time == converted_start_time:
+        #         return {"message": gettext("course_already_scheduled").format(name)}, 400
         data["name"] = name
         course = course_schema.load(data)
         try:

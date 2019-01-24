@@ -5,7 +5,6 @@ from schemas.user import UserSchema
 
 class CourseSchema(ma.ModelSchema):
     users = ma.Nested(UserSchema, many=True)
-    start_time = ma.DateTime()
 
     class Meta:
         model = CourseModel

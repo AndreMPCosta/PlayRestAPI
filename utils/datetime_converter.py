@@ -1,9 +1,14 @@
+import time
 from datetime import datetime
 
 
-def str_to_datetime(date_string):
-    return datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
+def str_to_time(time_string):
+    return datetime.strptime(time_string, '%H:%M:%S').time()
+
+
+def convert_date(date):
+    return datetime.strptime(date, "%d-%m-%Y")
 
 
 if __name__ == "__main__":
-    print(str_to_datetime("2019-01-21T19:20:00Z"))
+    print(str_to_time("19:20:00"))
