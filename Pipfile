@@ -17,6 +17,8 @@ flask-uploads = "*"
 twilio = "*"
 passlib = "*"
 uwsgi = "*"
+apscheduler = "*"
+flask-apscheduler = "*"
 
 [dev-packages]
 

@@ -1,7 +1,9 @@
 import logging
 import os
 import sys
+from datetime import datetime
 
+from flask_apscheduler import APScheduler
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
@@ -18,7 +20,9 @@ from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 from resources.confirmation import Confirmation, ConfirmationByUser, ConfirmationByCode
 from resources.image import ImageUpload
+from models.course import CourseModel
 from libs.image_helper import IMAGE_SET
+import atexit
 
 
 app = Flask(__name__)
@@ -75,7 +79,36 @@ api.add_resource(EnrollUser, "/enroll/")
 api.add_resource(DisenrollUser, "/disenroll/")
 api.add_resource(GetEnrolledUsers, "/enrolled_users/<int:course_id>")
 
+
+# Config scheduling of Jobs
+class Config(object):
+    JOBS = [
+        {
+            'id': 'clear_courses',
+            'func': CourseModel.clear_all,
+            'args': (datetime.today().weekday(), True),
+            'trigger': 'cron',
+            'hour': 23,
+            'minute': 00
+        }
+    ]
+
+    SCHEDULER_API_ENABLED = True
+
+
 if __name__ == "__main__":
     db.init_app(app)
+    db.app = app
     ma.init_app(app)
+    app.config.from_object(Config())
+    # Jobs
+    cron = APScheduler()
+    cron.init_app(app)
+    # Explicitly kick off the background thread
+    cron.start()
+
+    # Shutdown your cron thread if the web process is stopped
+    atexit.register(lambda: cron.shutdown(wait=False))
+    # Start Flask APP
     app.run(port=5000, host='0.0.0.0')
+

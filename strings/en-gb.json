@@ -42,6 +42,7 @@
   "user_password_success": "Your password was changed successfully.",
   "user_already_enrolled": "User is already enrolled in {} at {}",
   "user_enrolled": "User enrolled to {} at {}",
+  "user_disenrolled": "User disenrolled to {} at {}",
   "user_not_enrolled": "The user is not enrolled, so it is not possible to disenroll.",
   "user_not_registered": "The user is not registered yet, please register.",
 

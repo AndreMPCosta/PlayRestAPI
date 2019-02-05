@@ -12,6 +12,7 @@ from utils.datetime_converter import str_to_time
 
 course_schema = CourseSchema()
 course_list_schema = CourseSchema(many=True)
+week_list = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
 
 class Course(Resource):
@@ -56,7 +57,7 @@ class Course(Resource):
 class CourseList(Resource):
     @classmethod
     def get(cls):
-        return {"courses": course_list_schema.dump(CourseModel.find_all())}, 200
+        return {"courses": course_list_schema.dump(CourseModel.query.order_by(CourseModel.day_week).all())}, 200
 
 
 class EnrollUser(Resource):
@@ -69,7 +70,8 @@ class EnrollUser(Resource):
             if course:
                 if user in course.users:
                     return {"message": gettext('user_already_enrolled').format
-                            (course.name, course.start_time.strftime('%d/%m/%Y - %H:%M'))}, 400
+                            (course.name, week_list[course.day_week].capitalize() +
+                             course.start_time.strftime(' - %H:%M'))}, 400
                 else:
                     course.enroll_user(user)
             else:
@@ -77,7 +79,8 @@ class EnrollUser(Resource):
         else:
             return {"message": gettext("user_not_found")}, 404
         return {"message": gettext("user_enrolled").format
-                (course.name, course.start_time.strftime('%d/%m/%Y - %H:%M'))}, 200
+                (course.name, week_list[course.day_week].capitalize() +
+                 course.start_time.strftime(' - %H:%M'))}, 200
 
 
 class DisenrollUser(Resource):
@@ -96,8 +99,9 @@ class DisenrollUser(Resource):
                 return {"message": gettext("course_not_found")}, 404
         else:
             return {"message": gettext("user_not_found")}, 404
-        return {"message": gettext("user_enrolled").format
-                (course.name, course.start_time.strftime('%d/%m/%Y - %H:%M'))}, 200
+        return {"message": gettext("user_disenrolled").format
+                (course.name, week_list[course.day_week].capitalize() +
+                 course.start_time.strftime(' - %H:%M'))}, 200
 
 
 class GetEnrolledUsers(Resource):
