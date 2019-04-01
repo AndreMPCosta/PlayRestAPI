@@ -5,7 +5,7 @@ from twilio.rest.api.v2010.account.message import MessageInstance
 
 from libs.strings import gettext
 
-twilio_phone_number = '+447533061178'
+twilio_phone_number = ''
 
 
 class TwilioException(Exception):

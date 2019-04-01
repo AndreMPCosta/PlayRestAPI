@@ -1,6 +1,3 @@
-import datetime
-import time
-
 from flask import request
 from flask_restful import Resource
 
@@ -8,7 +5,6 @@ from models.course import CourseModel
 from models.user import UserModel
 from schemas.course import CourseSchema
 from libs.strings import gettext
-from utils.datetime_converter import str_to_time
 
 course_schema = CourseSchema()
 course_list_schema = CourseSchema(many=True)
