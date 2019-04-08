@@ -14,6 +14,7 @@ Future features:
 
 Front-End: https://gitlab.com/andrempcosta/playapp
 
-Screenshot:
+Screenshots:
 
 ![alt text](https://i.imgur.com/SPqATZI.png)
+![alt text](https://i.imgur.com/OMZ4nsg.png)
