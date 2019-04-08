@@ -18,3 +18,4 @@ Screenshots:
 
 ![alt text](https://i.imgur.com/SPqATZI.png)
 ![alt text](https://i.imgur.com/OMZ4nsg.png)
+![alt text](https://i.imgur.com/9HmrdNQ.gif)
